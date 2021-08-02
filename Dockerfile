@@ -14,6 +14,7 @@ RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
 ENV LANG=en_US.utf8
 ENV RUNNER_ALLOW_RUNASROOT=1
+ENV RUNNER_RUNS_ON=ubuntu
 
 WORKDIR /app
 RUN curl --silent -o actions-runner-linux-x64-2.279.0.tar.gz \
