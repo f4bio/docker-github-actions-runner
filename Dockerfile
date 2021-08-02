@@ -5,8 +5,6 @@ LABEL version="0.0.1"
 
 # https://github.com/moby/moby/issues/4032#issuecomment-192327844
 ARG DEBIAN_FRONTEND=noninteractive
-ARG REPOSITORY_URL
-ARG REPOSITORY_TOKEN
 
 RUN apt-get update --quiet --yes
 RUN apt-get install --quiet --yes apt-utils
@@ -24,6 +22,5 @@ RUN echo "50d21db4831afe4998332113b9facc3a31188f2d0c7ed258abf6a0b67674413a  acti
 RUN sha256sum --check actions-runner-linux-x64-2.279.0.tar.gz.sha256
 RUN tar xzf ./actions-runner-linux-x64-2.279.0.tar.gz
 
-RUN ./config.sh --url ${REPOSITORY_URL} --token ${REPOSITORY_TOKEN}
-
-ENTRYPOINT [ "/app/run.sh" ]
+COPY ./docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
