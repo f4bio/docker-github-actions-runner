@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
-/app/config.sh --unattended --url $REPOSITORY_URL --token $REPOSITORY_TOKEN --replace --labels $RUNNER_RUNS_ON
+if [ ! test -f /app/.runner ]; then
+  /app/config.sh --unattended --url $REPOSITORY_URL --token $REPOSITORY_TOKEN --replace --labels $RUNNER_RUNS_ON
+fi
 
-exec "/app/run.sh $@"
+/app/run.sh $@
